@@ -1,0 +1,14 @@
+process.env.NODE_ENV = "test";
+process.env.PORT = "4000";
+process.env.LOG_LEVEL = "silent";
+process.env.TRUST_PROXY = "false";
+process.env.MONGODB_URI = "mongodb://127.0.0.1:27017/grocery_platform_test";
+process.env.CUSTOMER_APP_URL = "http://localhost:3000";
+process.env.ADMIN_APP_URL = "http://localhost:3001";
+process.env.CORS_CUSTOMER_ORIGIN = "http://localhost:3000";
+process.env.CORS_ADMIN_ORIGIN = "http://localhost:3001";
+process.env.JWT_ACCESS_SECRET = "test-access-secret-1234567890-1234567890";
+process.env.JWT_REFRESH_SECRET = "test-refresh-secret-1234567890-123456789";
+process.env.JWT_ACCESS_TTL_MINUTES = "15";
+process.env.JWT_REFRESH_TTL_DAYS = "30";
+process.env.BCRYPT_ROUNDS = "10";

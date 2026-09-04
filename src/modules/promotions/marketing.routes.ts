@@ -1,0 +1,21 @@
+import { Router } from "express";
+import { requireAdminAuth } from "../../middleware/auth/admin-auth.js";
+import { requireCsrf } from "../../middleware/csrf.js";
+import { requirePermission } from "../../middleware/rbac/require-permission.js";
+import { asyncHandler } from "../../utils/async-handler.js";
+import { getBanners, getBundles, getCoupons, getPromotions, patchBanner, patchBundle, patchCoupon, patchPromotion, postBanner, postBundle, postCoupon, postPromotion } from "./marketing.controller.js";
+
+export const adminMarketingRouter = Router();
+adminMarketingRouter.use(requireAdminAuth);
+adminMarketingRouter.get("/promotions", requirePermission("marketing.read"), asyncHandler(getPromotions));
+adminMarketingRouter.post("/promotions", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(postPromotion));
+adminMarketingRouter.patch("/promotions/:id", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(patchPromotion));
+adminMarketingRouter.get("/coupons", requirePermission("marketing.read"), asyncHandler(getCoupons));
+adminMarketingRouter.post("/coupons", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(postCoupon));
+adminMarketingRouter.patch("/coupons/:id", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(patchCoupon));
+adminMarketingRouter.get("/banners", requirePermission("marketing.read"), asyncHandler(getBanners));
+adminMarketingRouter.post("/banners", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(postBanner));
+adminMarketingRouter.patch("/banners/:id", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(patchBanner));
+adminMarketingRouter.get("/bundles", requirePermission("marketing.read"), asyncHandler(getBundles));
+adminMarketingRouter.post("/bundles", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(postBundle));
+adminMarketingRouter.patch("/bundles/:id", requireCsrf("admin"), requirePermission("marketing.manage"), asyncHandler(patchBundle));
